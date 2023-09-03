@@ -15,8 +15,8 @@
 .DS_Store
 .prettierignore
 
-./design
+design
 
-./node_modules
+node_modules
 
 *.env*
