@@ -16,3 +16,7 @@
 .prettierignore
 
 ./design
+
+./node_modules
+
+*.env*
