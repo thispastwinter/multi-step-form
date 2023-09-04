@@ -21,6 +21,7 @@ export const PlanCard = ({
   return (
     <Card
       {...rest}
+      tabIndex={1}
       className={classNames(
         "w-full border flex flex-col gap-y-6",
         rest.className,

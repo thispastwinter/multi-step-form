@@ -24,18 +24,40 @@ export const Switch = <T extends string>({
 
   return (
     <div
+      role="group"
       className="flex justify-center items-center mt-4"
-      onClick={handleToggle}
+      aria-checked={currentFrequency === valueTwo}
     >
-      <p className="capitalize">{valueOne}</p>
-      <div className="w-14 h-7 flex items-center rounded-full mx-3 px-1 bg-blue-700">
+      <span
+        className={classNames("capitalize", {
+          "font-bold": currentFrequency === valueOne,
+        })}
+      >
+        {valueOne}
+      </span>
+      <div
+        role="switch"
+        onClick={handleToggle}
+        onKeyDown={(e) => e.key === " " && handleToggle()}
+        tabIndex={1}
+        className="w-14 h-7 flex items-center rounded-full mx-3 px-1 bg-blue-700 cursor-pointer"
+      >
         <div
-          className={classNames("bg-white w-5 h-5 rounded-full shadow-md", {
-            "translate-x-7": currentFrequency === valueTwo,
-          })}
+          className={classNames(
+            "bg-white w-5 h-5 rounded-full shadow-md transition-transform duration-300",
+            {
+              "translate-x-7": currentFrequency === valueTwo,
+            },
+          )}
         ></div>
       </div>
-      <p className="capitalize">{valueTwo}</p>
+      <span
+        className={classNames("capitalize", {
+          "font-bold": currentFrequency === valueTwo,
+        })}
+      >
+        {valueTwo}
+      </span>
     </div>
   )
 }

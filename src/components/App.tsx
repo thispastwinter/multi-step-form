@@ -32,11 +32,10 @@ const MainLayout: FC<PropsWithChildren> = () => {
 }
 
 const Main = () => {
-  const [params] = useSearchParams()
   return (
-    <Card className="bg-white grid grid-flow-col grid-cols-[1fr_2fr] h-[700px] md:w-[1000px] shadow-lg">
+    <Card className="bg-white grid grid-flow-col grid-cols-[1fr_2fr] h-[800px] w-[1000px] shadow-lg">
       <Nav navItems={navItems} />
-      <Form step={params.get("step") as string} />
+      <Form />
     </Card>
   )
 }
