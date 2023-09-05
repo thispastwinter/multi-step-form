@@ -1,9 +1,15 @@
-import { Outlet, Route, RouterProvider, Routes } from "react-router"
+import {
+  Outlet,
+  Route,
+  RouterProvider,
+  Routes,
+  useNavigate,
+} from "react-router"
 import { NavItem } from "../types/NavItem"
 import { Card } from "./Card"
 import { Nav } from "./Nav"
 import { createBrowserRouter } from "react-router-dom"
-import { FC, PropsWithChildren } from "react"
+import { FC, PropsWithChildren, useEffect } from "react"
 import { Form } from "./Form"
 import { NavMobile } from "./Nav/NavMobile"
 
@@ -25,6 +31,12 @@ const RootDefault = () => {
 }
 
 const MainLayout: FC<PropsWithChildren> = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate("/?step=1")
+  }, [])
+
   return (
     <div className="h-[100vh] mx-4 flex items-center justify-center">
       <NavMobile navItems={navItems} />
