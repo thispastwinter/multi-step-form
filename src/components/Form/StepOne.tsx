@@ -1,11 +1,10 @@
 import { useFormContext } from "react-hook-form"
 import { TextField } from "../TextField"
 import { StepHeader } from "./StepHeader"
-
-const STEP = 1
+import { FormValues } from "./Form"
 
 export const StepOne = () => {
-  const { register } = useFormContext()
+  const { register } = useFormContext<FormValues>()
 
   return (
     <div className="flex flex-col">
@@ -17,19 +16,19 @@ export const StepOne = () => {
         <TextField
           placeholder="e.g. Stephen King"
           label="Name"
-          {...register(`${STEP}.name`)}
+          {...register("1.name")}
         />
         <TextField
           placeholder="e.g. stephenking@lorem.com"
           type="email"
           label="Email Address"
-          {...register(`${STEP}.email`)}
+          {...register("1.email")}
         />
         <TextField
           placeholder="e.g. +1 123 456 7890"
           type="phone"
           label="Phone Number"
-          {...register(`${STEP}.phone`)}
+          {...register("1.phone")}
         />
       </div>
     </div>

@@ -3,66 +3,76 @@ import { StepOne } from "./StepOne"
 import { StepTwo } from "./StepTwo"
 import { FormProvider, useForm } from "react-hook-form"
 import { useCallback } from "react"
+import { StepThree } from "./StepThree"
+import { Frequency } from "../../types/Frequency"
+import { Addon } from "../../types/Addon"
+import { StepFour } from "./StepFour"
+import { Button } from "../Button"
 
 const defaultValues = {
+  frequency: "yearly" as keyof Frequency["rates"],
   "1": {
     name: "",
     email: "",
     phone: "",
   },
-  2: {
-    plan: "Advanced",
-    frequency: "yearly",
+  "2": {
+    planId: "e93abae5-7643-4f2a-8c28-12e6b03ac3fb",
+  },
+  "3": {
+    addonIds: [] as Array<Addon["id"]>,
   },
 }
+
+export type FormValues = typeof defaultValues
 
 export const Form = () => {
   const [params] = useSearchParams()
   const navigate = useNavigate()
-  const currentStep = params.get("step") as string
   const methods = useForm({ defaultValues })
-
-  const nextText = Number(currentStep) === 4 ? "Confirm" : "Next Step"
+  const currentStep = Number(params.get("step"))
+  const nextText = currentStep === 4 ? "Confirm" : "Next Step"
 
   const handleNextClick = useCallback(() => {
-    if (Number(currentStep) < 4) {
-      const nextStep = Number(currentStep) + 1
+    if (currentStep < 4) {
+      const nextStep = currentStep + 1
       navigate(`?step=${nextStep}`, { replace: true })
+    }
+    if (currentStep === 4) {
+      methods.handleSubmit(console.log)
     }
   }, [currentStep, navigate])
 
   const handleBackClick = useCallback(() => {
-    if (Number(currentStep) > 1) {
-      const previousStep = Number(currentStep) - 1
+    if (currentStep > 1) {
+      const previousStep = currentStep - 1
       navigate(`?step=${previousStep}`, { replace: true })
     }
   }, [currentStep, navigate])
 
   return (
     <FormProvider {...methods}>
-      <form
-        className="h-full flex flex-col"
-        onSubmit={methods.handleSubmit(console.log)}
-      >
+      <div className="h-full flex flex-col">
         <div className="p-16 flex flex-col w-full flex-grow relative">
-          {currentStep === "1" ? (
+          {currentStep === 1 ? (
             <StepOne />
-          ) : currentStep === "2" ? (
+          ) : currentStep === 2 ? (
             <StepTwo />
+          ) : currentStep === 3 ? (
+            <StepThree />
+          ) : currentStep === 4 ? (
+            <StepFour />
           ) : null}
         </div>
         <div className="px-16 pb-4 flex justify-between w-full text-white">
-          <button onClick={handleBackClick} className="text-blue-600 px-6 w-32">
+          <Button variant="text" onClick={handleBackClick} className="w-32">
             Go Back
-          </button>
-          <button
-            onClick={handleNextClick}
-            className="bg-blue-600 px-6 py-3 rounded-md w-32"
-          >
+          </Button>
+          <Button onClick={handleNextClick} className="w-32">
             {nextText}
-          </button>
+          </Button>
         </div>
-      </form>
+      </div>
     </FormProvider>
   )
 }

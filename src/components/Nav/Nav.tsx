@@ -7,8 +7,6 @@ interface NavProps {
 }
 
 export const Nav = ({ navItems }: NavProps) => {
-  console.log("I rendered")
-
   return (
     <Card className="bg-sidebar-desktop bg-cover bg-bottom bg-no-repeat flex flex-col h-full w-full">
       <ul className="text-white flex flex-col gap-y-8 p-4 uppercase">

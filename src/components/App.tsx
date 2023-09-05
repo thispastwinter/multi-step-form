@@ -2,7 +2,7 @@ import { Outlet, Route, RouterProvider, Routes } from "react-router"
 import { NavItem } from "../types/NavItem"
 import { Card } from "./Card"
 import { Nav } from "./Nav"
-import { createBrowserRouter, useSearchParams } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 import { FC, PropsWithChildren } from "react"
 import { Form } from "./Form"
 

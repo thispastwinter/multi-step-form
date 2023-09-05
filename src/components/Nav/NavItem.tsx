@@ -13,7 +13,10 @@ export const NavItem = ({ href, id, subTitle, title }: NavItemProps) => {
         <div
           className={classNames(
             "border transition-all duration-300 font-bold w-10 h-10 rounded-full flex justify-center items-center",
-            { "bg-[#BEE1FD] text-[#483EFF] border-[#BEE1FD]": isActive(id) },
+            {
+              "bg-blue-ribbon-100 text-blue-ribbon-500 border-blue-ribbon-100":
+                isActive(id),
+            },
           )}
         >
           {id}

@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { useCallback } from "react"
+import { FC, PropsWithChildren, useCallback } from "react"
 
 interface SwitchProps<T extends string> {
   values: [T, T]
@@ -28,19 +28,13 @@ export const Switch = <T extends string>({
       className="flex justify-center items-center mt-4"
       aria-checked={currentFrequency === valueTwo}
     >
-      <span
-        className={classNames("capitalize", {
-          "font-bold": currentFrequency === valueOne,
-        })}
-      >
-        {valueOne}
-      </span>
+      <Label isActive={currentFrequency === valueOne}>{valueOne}</Label>
       <div
         role="switch"
         onClick={handleToggle}
         onKeyDown={(e) => e.key === " " && handleToggle()}
         tabIndex={1}
-        className="w-14 h-7 flex items-center rounded-full mx-3 px-1 bg-blue-700 cursor-pointer"
+        className="w-14 h-7 flex items-center rounded-full mx-3 px-1 bg-green-vogue-950 cursor-pointer"
       >
         <div
           className={classNames(
@@ -51,13 +45,22 @@ export const Switch = <T extends string>({
           )}
         ></div>
       </div>
-      <span
-        className={classNames("capitalize", {
-          "font-bold": currentFrequency === valueTwo,
-        })}
-      >
-        {valueTwo}
-      </span>
+      <Label isActive={currentFrequency === valueTwo}>{valueTwo}</Label>
     </div>
+  )
+}
+
+const Label: FC<PropsWithChildren<{ isActive: boolean }>> = ({
+  isActive,
+  children,
+}) => {
+  return (
+    <span
+      className={classNames("font-bold capitalize", {
+        "text-gray-chateau-700": !isActive,
+      })}
+    >
+      {children}
+    </span>
   )
 }

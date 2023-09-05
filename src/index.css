@@ -4,7 +4,6 @@
 
 :root {
   --background-color: #efefef;
-  --text-color: #333333;
 }
 
 html {
@@ -27,5 +26,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   background: var(--background-color);
-  color: var(--text-color);
+  @apply text-gray-chateau-950;
 }
