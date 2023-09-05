@@ -24,7 +24,7 @@ export const StepTwo = () => {
         subTitle="You have the option of monthly or yearly billing"
       />
       <div className="flex flex-col h-full gap-y-8">
-        <div className="flex w-full gap-x-4">
+        <div className="flex flex-col md:flex-row w-full gap-4">
           {Object.values(plans).map((plan) => (
             <PlanCard
               key={plan.name}

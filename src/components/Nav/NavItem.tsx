@@ -21,7 +21,7 @@ export const NavItem = ({ href, id, subTitle, title }: NavItemProps) => {
         >
           {id}
         </div>
-        <div>
+        <div className="hidden md:block">
           <p className="font-light">{title}</p>
           <p className="text-lg font-bold">{subTitle}</p>
         </div>

@@ -1,15 +1,14 @@
 import { NavItem as NavItemProps } from "../../types/NavItem"
-import { Card } from "../Card"
 import { NavItem } from "./NavItem"
 
 interface NavProps {
   navItems: Array<NavItemProps>
 }
 
-export const Nav = ({ navItems }: NavProps) => {
+export const NavMobile = ({ navItems }: NavProps) => {
   return (
-    <Card className="hidden bg-sidebar-desktop bg-cover bg-bottom bg-no-repeat md:flex flex-col h-full w-full">
-      <ul className="text-white flex flex-col gap-y-8 p-4 uppercase">
+    <div className="md:hidden fixed top-0 w-full h-[300px] bg-sidebar-mobile bg-cover bg-bottom bg-no-repeat">
+      <ul className="text-white flex justify-around px-4 pt-12 uppercase">
         {navItems.map((navItem) => {
           return (
             <li key={navItem.id}>
@@ -18,6 +17,6 @@ export const Nav = ({ navItems }: NavProps) => {
           )
         })}
       </ul>
-    </Card>
+    </div>
   )
 }

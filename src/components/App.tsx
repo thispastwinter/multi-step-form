@@ -5,6 +5,7 @@ import { Nav } from "./Nav"
 import { createBrowserRouter } from "react-router-dom"
 import { FC, PropsWithChildren } from "react"
 import { Form } from "./Form"
+import { NavMobile } from "./Nav/NavMobile"
 
 const navItems: Array<NavItem> = [
   { href: "/?step=1", id: "1", subTitle: "Your Info", title: "Step 1" },
@@ -25,7 +26,8 @@ const RootDefault = () => {
 
 const MainLayout: FC<PropsWithChildren> = () => {
   return (
-    <div className="h-[100vh] flex items-center justify-center">
+    <div className="h-[100vh] m-6 flex items-center justify-center">
+      <NavMobile navItems={navItems} />
       <Outlet />
     </div>
   )
@@ -33,7 +35,7 @@ const MainLayout: FC<PropsWithChildren> = () => {
 
 const Main = () => {
   return (
-    <Card className="bg-white grid grid-flow-col grid-cols-[1fr_2fr] h-[800px] w-[1000px] shadow-lg">
+    <Card className="bg-white z-40 grid md:grid-flow-col md:grid-cols-[1fr_2fr] w-full md:h-[800px] md:w-[1000px] shadow-lg">
       <Nav navItems={navItems} />
       <Form />
     </Card>

@@ -27,4 +27,5 @@ body {
   height: 100%;
   background: var(--background-color);
   @apply text-gray-chateau-950;
+  @apply text-[90%] md:text-[100%];
 }

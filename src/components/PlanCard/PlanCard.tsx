@@ -41,7 +41,7 @@ export const PlanCard = ({
       onKeyDown={(e) => e.key === "Enter" && onClick(id)}
       onClick={() => onClick(id)}
       className={classNames(
-        "hover:border-blue-ribbon-500 cursor-pointer transition-colors duration-300 w-full border flex flex-col gap-y-6",
+        "hover:border-blue-ribbon-500 cursor-pointer transition-colors duration-300 w-full border flex md:flex-col gap-x-4 gap-y-3 md:gap-y-6",
         {
           "border-blue-ribbon-500": isSelected,
         },

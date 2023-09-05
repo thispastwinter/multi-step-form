@@ -53,7 +53,7 @@ export const Form = () => {
   return (
     <FormProvider {...methods}>
       <div className="h-full flex flex-col">
-        <div className="p-16 flex flex-col w-full flex-grow relative">
+        <div className="p-6 md:p-16 flex flex-col w-full flex-grow relative">
           {currentStep === 1 ? (
             <StepOne />
           ) : currentStep === 2 ? (
@@ -64,7 +64,7 @@ export const Form = () => {
             <StepFour />
           ) : null}
         </div>
-        <div className="px-16 pb-4 flex justify-between w-full text-white">
+        <div className="fixed left-0 right-0 bg-white md:bg-none bottom-0 md:relative px-16 p-4 flex justify-between w-full text-white">
           <Button variant="text" onClick={handleBackClick} className="w-32">
             Go Back
           </Button>
