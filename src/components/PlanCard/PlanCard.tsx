@@ -41,7 +41,7 @@ export const PlanCard = ({
       onKeyDown={(e) => e.key === "Enter" && onClick(id)}
       onClick={() => onClick(id)}
       className={classNames(
-        "hover:border-blue-ribbon-500 cursor-pointer transition-colors duration-300 w-full border flex md:flex-col gap-x-4 gap-y-3 md:gap-y-6",
+        "hover:border-blue-ribbon-500 cursor-pointer transition-colors duration-300 w-full border flex md:flex-col gap-x-4 md:items-start items-center gap-y-3 md:gap-y-6",
         {
           "border-blue-ribbon-500": isSelected,
         },
@@ -53,7 +53,7 @@ export const PlanCard = ({
         <p className="text-gray-chateau-700">{price.display}</p>
       </div>
       {currentFrequency === "yearly" && (
-        <p className="text-xs font-bold">2 months free</p>
+        <p className="text-xs font-bold ml-auto">2 months free</p>
       )}
     </Card>
   )

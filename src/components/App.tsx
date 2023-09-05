@@ -26,7 +26,7 @@ const RootDefault = () => {
 
 const MainLayout: FC<PropsWithChildren> = () => {
   return (
-    <div className="h-[100vh] m-6 flex items-center justify-center">
+    <div className="h-[100vh] mx-6 flex items-center justify-center">
       <NavMobile navItems={navItems} />
       <Outlet />
     </div>
