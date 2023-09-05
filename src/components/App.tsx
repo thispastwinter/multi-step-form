@@ -38,7 +38,7 @@ const MainLayout: FC<PropsWithChildren> = () => {
   }, [])
 
   return (
-    <div className="h-[100vh] mx-4 flex items-center justify-center">
+    <div className="h-full md:h-[100vh] mx-4 flex flex-col justify-center items-center overflow-y-scroll">
       <NavMobile navItems={navItems} />
       <Outlet />
     </div>
@@ -47,7 +47,7 @@ const MainLayout: FC<PropsWithChildren> = () => {
 
 const Main = () => {
   return (
-    <Card className="bg-white z-40 grid md:grid-flow-col md:grid-cols-[1fr_2fr] w-full md:h-[800px] md:w-[1000px] shadow-lg">
+    <Card className="bg-white z-40 my-36 grid md:grid-flow-col md:grid-cols-[1fr_2fr] w-full md:h-[800px] md:w-[1000px] shadow-lg">
       <Nav navItems={navItems} />
       <Form />
     </Card>
