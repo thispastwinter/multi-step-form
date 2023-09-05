@@ -21,7 +21,7 @@ export const AddonCard = (props: AddonCardProps) => {
         { "border-blue-ribbon-500": props.isChecked },
       )}
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="flex items-center">
           <input
             type="checkbox"
@@ -31,7 +31,9 @@ export const AddonCard = (props: AddonCardProps) => {
           />
           <div>
             <p className="font-bold">{props.name}</p>
-            <p className="text-gray-chateau-700">{props.detail}</p>
+            <p className="text-gray-chateau-700 text-xs md:text-base">
+              {props.detail}
+            </p>
           </div>
         </div>
         <p className={classNames({ "text-blue-ribbon-500": props.isChecked })}>
