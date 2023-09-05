@@ -38,7 +38,7 @@ const MainLayout: FC<PropsWithChildren> = () => {
   }, [])
 
   return (
-    <div className="h-full md:h-[100vh] mx-4 flex items-center justify-center">
+    <div className="md:h-[100vh] mx-4 flex items-center justify-center overflow-y-scroll">
       <NavMobile navItems={navItems} />
       <Outlet />
     </div>
