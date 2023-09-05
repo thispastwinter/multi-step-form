@@ -7,7 +7,7 @@ import { StepThree } from "./StepThree"
 import { Frequency } from "../../types/Frequency"
 import { Addon } from "../../types/Addon"
 import { StepFour } from "./StepFour"
-import { Button } from "../Button"
+import { Footer } from "./Footer"
 
 const defaultValues = {
   frequency: "yearly" as keyof Frequency["rates"],
@@ -54,25 +54,27 @@ export const Form = () => {
     <FormProvider {...methods}>
       <div className="h-full flex flex-col">
         <div className="p-3 md:p-16 flex flex-col w-full flex-grow relative">
-          {currentStep === 1 ? (
-            <StepOne />
-          ) : currentStep === 2 ? (
-            <StepTwo />
-          ) : currentStep === 3 ? (
-            <StepThree />
-          ) : currentStep === 4 ? (
-            <StepFour />
-          ) : null}
+          <StepComponent step={currentStep} />
         </div>
-        <div className="fixed left-0 right-0 bg-white md:bg-none bottom-0 md:relative md:px-16 px-8 py-4 flex justify-between w-full text-white">
-          <Button variant="text" onClick={handleBackClick} className="w-32">
-            Go Back
-          </Button>
-          <Button onClick={handleNextClick} className="w-32">
-            {nextText}
-          </Button>
-        </div>
+        <Footer
+          onBackClick={handleBackClick}
+          onNextClick={handleNextClick}
+          nextText={nextText}
+          backText="Go Back"
+          canGoBack={currentStep != 1}
+        />
       </div>
     </FormProvider>
   )
+}
+
+const StepComponent = ({ step }: { step: number }) => {
+  const steps = {
+    1: <StepOne />,
+    2: <StepTwo />,
+    3: <StepThree />,
+    4: <StepFour />,
+  }
+
+  return steps[step as 1 | 2 | 3 | 4]
 }

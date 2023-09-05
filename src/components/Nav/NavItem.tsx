@@ -1,9 +1,9 @@
 import { NavLink, useSearchParams } from "react-router-dom"
 import { NavItem as NavItemProps } from "../../types/NavItem"
-import { useMemo } from "react"
+import { FC, useMemo } from "react"
 import classNames from "classnames"
 
-export const NavItem = ({ href, id, subTitle, title }: NavItemProps) => {
+export const NavItem: FC<NavItemProps> = ({ href, id, subTitle, title }) => {
   const [params] = useSearchParams()
   const isActive = useMemo(() => getIsActive(params), [params])
 

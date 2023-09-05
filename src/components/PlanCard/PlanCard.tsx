@@ -6,6 +6,7 @@ import { ReactComponent as arcade } from "../../assets/images/icon-arcade.svg"
 import { ReactComponent as pro } from "../../assets/images/icon-pro.svg"
 import { frequencies } from "../Form/formData/frequencies"
 import { Frequency } from "../../types/Frequency"
+import { FC } from "react"
 
 const icons = {
   advanced,
@@ -21,7 +22,7 @@ interface PlanCardProps extends Plan {
   onClick: (id: string) => void
 }
 
-export const PlanCard = ({
+export const PlanCard: FC<PlanCardProps> = ({
   name,
   id,
   icon,
@@ -30,7 +31,7 @@ export const PlanCard = ({
   currentFrequency,
   onClick,
   ...rest
-}: PlanCardProps) => {
+}) => {
   const Icon = getIcon(icon as IconName)
   const { price } = frequencies[frequencyId].rates[currentFrequency]
 

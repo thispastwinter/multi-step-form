@@ -1,11 +1,11 @@
 import classNames from "classnames"
-import { ComponentProps } from "react"
+import { ComponentProps, FC } from "react"
 
 interface ButtonProps extends ComponentProps<"button"> {
   variant?: "solid" | "outline" | "text"
 }
 
-export const Button = ({ variant = "solid", ...rest }: ButtonProps) => {
+export const Button: FC<ButtonProps> = ({ variant = "solid", ...rest }) => {
   return (
     <button
       {...rest}
