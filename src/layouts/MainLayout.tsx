@@ -15,7 +15,7 @@ export const MainLayout: FC = () => {
   }, [])
 
   return (
-    <div className="h-full md:h-[100vh] mx-4 flex flex-col justify-center items-center overflow-y-scroll">
+    <div className="h-full md:h-[100vh] px-4 flex flex-col justify-center items-center overflow-y-scroll">
       <NavMobile />
       <Outlet />
     </div>

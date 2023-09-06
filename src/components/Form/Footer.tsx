@@ -1,5 +1,6 @@
 import { FC } from "react"
 import { Button } from "../Button"
+import classNames from "classnames"
 
 interface FooterProps {
   onBackClick: () => void
@@ -23,7 +24,13 @@ export const Footer: FC<FooterProps> = ({
           {backText}
         </Button>
       )}
-      <Button onClick={onNextClick} className="w-32 ml-auto">
+      <Button
+        onClick={onNextClick}
+        className={classNames("w-32 ml-auto", {
+          "bg-blue-ribbon-500 hover:bg-blue-ribbon-400":
+            nextText.toLowerCase() === "confirm",
+        })}
+      >
         {nextText}
       </Button>
     </div>
