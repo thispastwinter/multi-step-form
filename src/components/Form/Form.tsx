@@ -2,7 +2,7 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import { StepOne } from "./StepOne"
 import { StepTwo } from "./StepTwo"
 import { FormProvider, useForm } from "react-hook-form"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import { StepThree } from "./StepThree"
 import { Frequency } from "../../types/Frequency"
 import { Addon } from "../../types/Addon"
@@ -30,7 +30,7 @@ export const Form = () => {
   const [params] = useSearchParams()
   const navigate = useNavigate()
   const methods = useForm({ defaultValues })
-  const currentStep = Number(params.get("step"))
+  const currentStep = useMemo(() => Number(params.get("step")), [params])
   const nextText = currentStep === 4 ? "Confirm" : "Next Step"
 
   const handleNextClick = useCallback(() => {
@@ -41,7 +41,7 @@ export const Form = () => {
     if (currentStep === 4) {
       methods.handleSubmit(console.log)
     }
-  }, [currentStep, navigate])
+  }, [currentStep, navigate, methods.handleSubmit])
 
   const handleBackClick = useCallback(() => {
     if (currentStep > 1) {

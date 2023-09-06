@@ -1,14 +1,17 @@
 import { PlanCard } from "../PlanCard"
 import { Switch } from "../Switch"
 import { StepHeader } from "./StepHeader"
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useWatch } from "react-hook-form"
 import { plans } from "./formData/plans"
 import { FormValues } from "./Form"
 import { useCallback } from "react"
 
 export const StepTwo = () => {
-  const { setValue, watch } = useFormContext<FormValues>()
-  const [frequency, planId] = watch(["frequency", "2.planId"])
+  const { setValue, getValues } = useFormContext<FormValues>()
+  const frequency = getValues("frequency")
+  const planId = getValues("2.planId")
+  useWatch<FormValues>({ name: "frequency" })
+  useWatch<FormValues>({ name: "2.planId" })
 
   const handlePlanUpdate = useCallback(
     (planId: string) => {

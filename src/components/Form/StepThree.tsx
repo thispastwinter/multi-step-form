@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useWatch } from "react-hook-form"
 import { Addon } from "../../types/Addon"
 import { AddonCard } from "../AddonCard"
 import { StepHeader } from "./StepHeader"
@@ -8,15 +8,17 @@ import { addons } from "./formData/addons"
 import { FormValues } from "./Form"
 
 export const StepThree = () => {
-  const { setValue, watch } = useFormContext<FormValues>()
-
-  const [frequency, addonIds] = watch(["frequency", "3.addonIds"])
+  const { setValue, getValues } = useFormContext<FormValues>()
+  const frequency = getValues("frequency")
+  const addonIds = getValues("3.addonIds")
+  useWatch<FormValues>({ name: "frequency" })
+  useWatch<FormValues>({ name: "3.addonIds" })
 
   const handleAddonClick = useCallback(
     (id: Addon["id"]) => {
       setValue("3.addonIds", xor(addonIds, [id]))
     },
-    [addonIds],
+    [addonIds, setValue],
   )
 
   return (
