@@ -1,5 +1,4 @@
-import { useFormContext } from "react-hook-form"
-import { FormValues } from "./Form"
+import { useFormContext, useWatch } from "react-hook-form"
 import { plans } from "./formData/plans"
 import { NavLink } from "react-router-dom"
 import { StepHeader } from "./StepHeader"
@@ -8,15 +7,17 @@ import { useMemo } from "react"
 import { Addon } from "../../types/Addon"
 import { sum } from "lodash"
 import { frequencies } from "./formData/frequencies"
+import { FormValues } from "./schema"
+import classNames from "classnames"
 
 export const StepFour = () => {
-  const { getValues } = useFormContext<FormValues>()
-
+  const methods = useFormContext<FormValues>()
+  const values = methods.getValues()
   const {
     frequency,
     "2": { planId },
     "3": { addonIds },
-  } = getValues()
+  } = values
 
   const plan = plans[planId]
   const { price: planPrice } = frequencies[plan.frequencyId].rates[frequency]
@@ -47,8 +48,27 @@ export const StepFour = () => {
         subTitle="Double-check everything looks OK before confirming"
       />
       <div className="grid gap-y-8 divide-y">
-        <div className="flex justify-between items-center">
-          <div>
+        <div>
+          <p className="capitalize font-bold text-lg pb-4">Personal Details</p>
+          <div className="grid gap-y-4 text-gray-chateau-700">
+            {Object.entries(values["1"]).map(([field, value]) => (
+              <div key={field} className="flex justify-between">
+                <p className="capitalize">{field}</p>
+                <p className={classNames({ "text-red-800": !value })}>
+                  {value || "Missing Required Field"}
+                </p>
+              </div>
+            ))}
+            <NavLink
+              className="underline text-gray-chateau-700 hover:text-blue-ribbon-500"
+              to="/?step=1"
+            >
+              Change
+            </NavLink>
+          </div>
+        </div>
+        <div className="flex justify-between items-center pt-8">
+          <div className="gap-y-8">
             <p className="capitalize font-bold text-lg">
               {plan.name} ({frequency})
             </p>
@@ -61,9 +81,13 @@ export const StepFour = () => {
           </div>
           <p className="font-bold text-lg">{planPrice.display}</p>
         </div>
-        <div className="grid gap-y-4 pt-8 text-gray-chateau-700">
+        <div className="grid gap-y-4 pt-8 ">
+          <p className="capitalize font-bold text-lg">Add Ons</p>
           {addonsList.map(({ name, frequencyId, id }) => (
-            <div key={id} className="flex justify-between">
+            <div
+              key={id}
+              className="flex justify-between text-gray-chateau-700"
+            >
               <p>{name}</p>
               <p>{frequencies[frequencyId].rates[frequency].price.display}</p>
             </div>

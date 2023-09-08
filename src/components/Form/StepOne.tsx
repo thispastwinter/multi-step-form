@@ -1,10 +1,12 @@
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useWatch } from "react-hook-form"
 import { TextField } from "../TextField"
 import { StepHeader } from "./StepHeader"
-import { FormValues } from "./Form"
+import { FormValues } from "./schema"
 
 export const StepOne = () => {
   const { register } = useFormContext<FormValues>()
+
+  useWatch<FormValues>({ name: "1" })
 
   return (
     <div className="flex flex-col">
@@ -26,7 +28,7 @@ export const StepOne = () => {
         />
         <TextField
           placeholder="e.g. +1 123 456 7890"
-          type="phone"
+          type="tel"
           label="Phone Number"
           {...register("1.phone")}
         />

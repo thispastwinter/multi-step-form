@@ -4,48 +4,66 @@ import { StepTwo } from "./StepTwo"
 import { FormProvider, useForm } from "react-hook-form"
 import { useCallback, useMemo } from "react"
 import { StepThree } from "./StepThree"
-import { Frequency } from "../../types/Frequency"
-import { Addon } from "../../types/Addon"
 import { StepFour } from "./StepFour"
 import { Footer } from "./Footer"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { FormValues, schema } from "./schema"
 
-const defaultValues = {
-  frequency: "yearly" as keyof Frequency["rates"],
+const defaultValues: FormValues = {
+  frequency: "yearly",
   "1": {
-    name: "",
     email: "",
+    name: "",
     phone: "",
   },
   "2": {
     planId: "e93abae5-7643-4f2a-8c28-12e6b03ac3fb",
   },
   "3": {
-    addonIds: [] as Array<Addon["id"]>,
+    addonIds: [],
   },
 }
-
-export type FormValues = typeof defaultValues
 
 export const Form = () => {
   const [params] = useSearchParams()
   const navigate = useNavigate()
-  const methods = useForm({ defaultValues })
+  const methods = useForm({
+    defaultValues,
+    reValidateMode: "onBlur",
+    resolver: zodResolver(schema),
+  })
   const currentStep = useMemo(() => Number(params.get("step")), [params])
   const nextText = currentStep === 4 ? "Confirm" : "Next Step"
 
-  const handleNextClick = useCallback(() => {
+  const handleNextClick = useCallback(async () => {
+    let nextStep = currentStep
+
     if (currentStep < 4) {
-      const nextStep = currentStep + 1
-      navigate(`?step=${nextStep}`, { replace: true })
+      nextStep += 1
     }
-    if (currentStep === 4) {
-      methods.handleSubmit(console.log)
-    }
+
+    await methods.handleSubmit(
+      (values) => {
+        if (currentStep === 4) {
+          console.log("VALUES:", values)
+          return
+        }
+        navigate(`?step=${nextStep}`, { replace: true })
+      },
+      (errors) => {
+        const stepKey = String(currentStep) as keyof typeof errors
+        if (!errors[stepKey] && currentStep < 4) {
+          navigate(`?step=${nextStep}`, { replace: true })
+        }
+      },
+    )()
   }, [currentStep, navigate, methods.handleSubmit])
 
   const handleBackClick = useCallback(() => {
+    let previousStep = currentStep
+
     if (currentStep > 1) {
-      const previousStep = currentStep - 1
+      previousStep -= 1
       navigate(`?step=${previousStep}`, { replace: true })
     }
   }, [currentStep, navigate])

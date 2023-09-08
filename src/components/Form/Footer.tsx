@@ -18,7 +18,7 @@ export const Footer: FC<FooterProps> = ({
   canGoBack,
 }) => {
   return (
-    <div className="fixed left-0 right-0 bg-white md:bg-none bottom-0 md:relative md:px-16 px-8 py-4 flex justify-between w-full text-white">
+    <div className="fixed left-0 right-0 bg-white md:bg-transparent bottom-0 md:relative md:px-16 px-8 py-4 flex justify-between w-full text-white">
       {canGoBack && (
         <Button variant="text" onClick={onBackClick} className="w-32">
           {backText}

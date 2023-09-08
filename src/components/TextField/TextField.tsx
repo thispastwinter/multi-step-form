@@ -1,4 +1,5 @@
 import { ComponentProps, forwardRef } from "react"
+import { useController } from "react-hook-form"
 
 interface TextFieldProps extends ComponentProps<"input"> {
   name: string
@@ -7,6 +8,10 @@ interface TextFieldProps extends ComponentProps<"input"> {
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
+    const {
+      field,
+      fieldState: { error },
+    } = useController(props)
     const { label, ...rest } = props
 
     return (
@@ -15,10 +20,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {label}
         </label>
         <input
-          ref={ref}
           className="form-input rounded-md peer hover:border-blue-ribbon-500 focus:border-blue-ribbon-500 outline-none focus:ring-transparent"
           {...rest}
+          {...field}
+          ref={ref}
         />
+        {error && <p className="text-red-800">{error.message}</p>}
       </div>
     )
   },

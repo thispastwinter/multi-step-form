@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react"
 import { Outlet, useNavigate } from "react-router"
 import { useSearchParams } from "react-router-dom"
-import { NavMobile } from "../components/Nav/NavMobile"
+import { StepIndicatorMobile } from "../components/StepIndicator/StepIndicatorMobile"
 
 export const MainLayout: FC = () => {
   const [params] = useSearchParams()
@@ -12,11 +12,11 @@ export const MainLayout: FC = () => {
       return
     }
     navigate("/?step=1")
-  }, [])
+  }, [navigate])
 
   return (
     <div className="h-full md:h-[100vh] px-4 flex flex-col justify-center items-center overflow-y-scroll">
-      <NavMobile />
+      <StepIndicatorMobile />
       <Outlet />
     </div>
   )

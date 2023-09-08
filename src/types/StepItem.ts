@@ -1,6 +1,5 @@
-export interface NavItem {
+export interface StepItem {
   title: string
   subTitle: string
   id: string
-  href: string
 }
